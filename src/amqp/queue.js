@@ -191,6 +191,14 @@ function subscribe( channelName, channel, topology, messages, options ) {
 	}
 
 	log.info( 'Starting subscription %s - %s', channelName, topology.connection.name );
+
+	var opts = options;
+	if(options.exclusiveConsumer) {
+		opts = _.clone(options)
+		opts.exclusive = true;
+		delete opts.exclusiveConsumer;
+	}
+
 	return channel.consume( channelName, function( raw ) {
 		var correlationId = raw.properties.correlationId;
 		raw.body = JSON.parse( raw.content.toString( 'utf8' ) );
@@ -237,7 +245,7 @@ function subscribe( channelName, channel, topology, messages, options ) {
 		} else {
 			dispatch.publish( raw.type, raw, onPublish );
 		}
-	}, options )
+	}, opts )
 		.then( function( result ) {
 			channel.tag = result.consumerTag;
 			return result;

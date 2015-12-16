@@ -353,18 +353,19 @@ Options is a hash that can contain the following:
 The call returns a promise that can be used to determine when the queue has been created on the server.
 
 Options is a hash that can contain the following:
- * autoDelete		true|false		delete when consumer count goes to 0
- * durable 			true|false		survive broker restarts
- * exclusive		true|false		limits queue to the current connection only (danger)
- * subscribe		true|false		auto-start the subscription
- * limit 			2^16			max number of unacked messages allowed for consumer
- * noAck			true|false 		the server will remove messages from the queue as soon as they are delivered
- * noBatch			true|false 		causes ack, nack & reject to take place immediately
- * queueLimit		2^32			max number of ready messages a queue can hold
- * messageTtl		2^32			time in ms before a message expires on the queue
- * expires			2^32			time in ms before a queue with 0 consumers expires
- * deadLetter 		'dlx.exchange'	the exchange to dead-letter messages to
- * maxPriority		2^8				the highest priority this queue supports
+ * autoDelete			true|false		delete when consumer count goes to 0
+ * durable 				true|false		survive broker restarts
+ * exclusive			true|false		limits queue to the current connection only (danger)
+ * exclusiveConsumer	true|false		the broker won't let anyone else consume from this queue
+ * subscribe			true|false		auto-start the subscription
+ * limit 				2^16			max number of unacked messages allowed for consumer
+ * noAck				true|false 		the server will remove messages from the queue as soon as they are delivered
+ * noBatch				true|false 		causes ack, nack & reject to take place immediately
+ * queueLimit			2^32			max number of ready messages a queue can hold
+ * messageTtl			2^32			time in ms before a message expires on the queue
+ * expires				2^32			time in ms before a queue with 0 consumers expires
+ * deadLetter 			'dlx.exchange'	the exchange to dead-letter messages to
+ * maxPriority			2^8				the highest priority this queue supports
 
 ### bindExchange( sourceExchange, targetExchange, [routingKeys], [connectionName] )
 Binds the target exchange to the source exchange. Messages flow from source to target.
